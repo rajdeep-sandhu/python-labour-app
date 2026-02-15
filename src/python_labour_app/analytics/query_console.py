@@ -1,7 +1,7 @@
 import marimo
 
 __generated_with = "0.19.11"
-app = marimo.App(width="full", app_title="Qquey Console")
+app = marimo.App(width="full", app_title="Query Console")
 
 
 @app.cell(hide_code=True)
@@ -15,6 +15,8 @@ def _(mo):
 @app.cell
 def _():
     import marimo as mo
+    import os
+    import sqlalchemy
 
     return (mo,)
 
