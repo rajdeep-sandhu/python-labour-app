@@ -31,6 +31,17 @@ def _(os, sqlalchemy):
 
     DATABASE_URL = f"postgresql+psycopg://{_username}:{_password}@db:5432/{_database}"
     engine = sqlalchemy.create_engine(DATABASE_URL)
+    return (engine,)
+
+
+@app.cell
+def _(engine, mo):
+    _df = mo.sql(
+        f"""
+        SELECT * from information_schema.tables;
+        """,
+        engine=engine
+    )
     return
 
 
