@@ -9,6 +9,7 @@ authors = [
 requires-python = ">=3.13"
 dependencies = [
     "marimo[sql]>=0.19.11",
+    "psycopg[binary]>=3.3.2",
     "sqlalchemy>=2.0.46",
 ]
 
