@@ -10,3 +10,7 @@ class DatabaseFactory(ABC):
     @abstractmethod
     def create_engine(self) -> Engine:
         pass
+
+    @abstractmethod
+    def create_session(self) -> Session:
+        pass
