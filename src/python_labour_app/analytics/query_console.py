@@ -23,7 +23,7 @@ def _():
 
 @app.cell
 def _(os, sqlalchemy):
-    # Vonnect to postgres
+    # Connect to postgres
     _password = os.environ.get("POSTGRES_PASSWORD")
     _username = os.environ.get("POSTGRES_USER")
     _database = os.environ.get("POSTGRES_DB")
