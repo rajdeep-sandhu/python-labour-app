@@ -6,3 +6,7 @@ from sqlalchemy.orm import Session
 
 class DatabaseFactory(ABC):
     """Abstract factory for database resources."""
+
+    @abstractmethod
+    def create_engine(self) -> Engine:
+        pass
