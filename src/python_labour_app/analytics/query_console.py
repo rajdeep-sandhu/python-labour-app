@@ -37,7 +37,7 @@ def _(os, sqlalchemy):
 @app.cell
 def _(engine, mo):
     _df = mo.sql(
-        f"""
+        """
         SELECT * from information_schema.tables;
         """,
         engine=engine
