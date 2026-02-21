@@ -20,3 +20,7 @@ class SQLiteFactory(DatabaseFactory):
     def create_engine(self) -> Engine:
         """Create an Engine instance."""
         return self._engine
+
+    def create_session(self) -> Session:
+        """Create a session."""
+        return self._sessionmaker()
