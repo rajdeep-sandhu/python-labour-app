@@ -29,7 +29,7 @@ class PostgresFactory(DatabaseFactory):
 
         self._engine = create_engine(url)
 
-        self._session = sessionmaker(
+        self._sessionmaker = sessionmaker(
             bind=self._engine, autoflush=False, autocommit=False
         )
     
