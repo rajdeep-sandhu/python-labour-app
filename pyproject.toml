@@ -25,3 +25,6 @@ dev = [
     "pytest>=9.0.2",
     "ruff>=0.15.1",
 ]
+
+[tool.pytest]
+addopts = ["--no-capture", "-v"]
