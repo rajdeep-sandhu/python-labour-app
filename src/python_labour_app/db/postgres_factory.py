@@ -32,3 +32,6 @@ class PostgresFactory(DatabaseFactory):
         self._session = sessionmaker(
             bind=self._engine, autoflush=False, autocommit=False
         )
+    
+    def create_engine(self) -> Engine:
+        return self._engine
