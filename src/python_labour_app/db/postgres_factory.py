@@ -34,4 +34,6 @@ class PostgresFactory(DatabaseFactory):
         )
     
     def create_engine(self) -> Engine:
+        """Create an Engine instance."""
         return self._engine
+
