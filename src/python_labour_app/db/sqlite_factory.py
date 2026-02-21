@@ -16,3 +16,7 @@ class SQLiteFactory(DatabaseFactory):
         self._sessionmaker = sessionmaker(
             bind=self._engine, autoflush=False, autocommit=False
         )
+
+    def create_engine(self) -> Engine:
+        """Create an Engine instance."""
+        return self._engine
