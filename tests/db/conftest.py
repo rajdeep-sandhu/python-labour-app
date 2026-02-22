@@ -1,12 +1,11 @@
 from typing import Generator
 
 import pytest
-from sqlalchemy import Connection, Engine, RootTransaction
+from sqlalchemy import Connection, Engine, RootTransaction, create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
 from python_labour_app.db.models import Base
 from python_labour_app.db.sqlite_factory import SQLiteFactory
-
 
 @pytest.fixture(scope="session")
 def sqlite_factory() -> SQLiteFactory:
@@ -15,9 +14,10 @@ def sqlite_factory() -> SQLiteFactory:
 
 
 @pytest.fixture(scope="session")
-def engine(sqlite_factory: SQLiteFactory) -> Generator[Engine, None, None]:
+def engine() -> Generator[Engine, None, None]:
     """Setup engine and metadata for the test session."""
-    engine: Engine = sqlite_factory.create_engine()
+    url = "sqlite+pysqlite:///test.db"
+    engine = create_engine(url)
 
     # Setup: Create tables.
     Base.metadata.create_all(bind=engine)
