@@ -1,4 +1,7 @@
+from typing import Generator
+
 import pytest
+from sqlalchemy import Engine
 from sqlalchemy.orm import Session
 
 from python_labour_app.db.models import Base
@@ -12,9 +15,9 @@ def sqlite_factory() -> SQLiteFactory:
 
 
 @pytest.fixture(scope="session")
-def engine(sqlite_factory: SQLiteFactory):
+def engine(sqlite_factory: SQLiteFactory) -> Generator[Engine, None, None]:
     """Setup engine and metadata for the test session."""
-    engine = sqlite_factory.create_engine()
+    engine: Engine = sqlite_factory.create_engine()
 
     # Setup: Create tables.
     Base.metadata.create_all(bind=engine)
@@ -23,5 +26,3 @@ def engine(sqlite_factory: SQLiteFactory):
 
     # Teardown: Drop tables.
     Base.metadata.drop_all(bind=engine)
-
-
