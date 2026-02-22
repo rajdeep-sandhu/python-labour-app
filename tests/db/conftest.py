@@ -7,6 +7,7 @@ from python_labour_app.db.sqlite_factory import SQLiteFactory
 
 @pytest.fixture(scope="session")
 def sqlite_factory() -> SQLiteFactory:
+    """Return SQLiteFactory for a test database."""
     return SQLiteFactory(url="sqlite+pysqlite:///test.db")
 
 
@@ -19,6 +20,6 @@ def engine(sqlite_factory: SQLiteFactory):
     Base.metadata.create_all(bind=engine)
 
     yield
-    
+
     # Teardown: Drop tables.
     Base.metadata.drop_all(bind=engine)
