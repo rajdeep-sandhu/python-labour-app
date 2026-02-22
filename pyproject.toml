@@ -27,4 +27,4 @@ dev = [
 ]
 
 [tool.pytest]
-addopts = ["--no-capture", "-v"]
+addopts = ["--capture=no", "-v"]
