@@ -38,3 +38,15 @@ def test_emp_no_unique_constraint(session) -> None:
 
     with pytest.raises(IntegrityError):
         session.commit()
+
+
+def test_employee_can_be_deactivated(session) -> None:
+    employee: Employee = Employee(first_name="Amrik", last_name="Singh")
+    session.add(employee)
+    session.commit()
+
+    employee.is_active = False
+    session.commit()
+    session.refresh(employee)
+
+    assert employee.is_active is False
