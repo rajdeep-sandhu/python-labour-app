@@ -20,3 +20,15 @@ class Employee(Base):
     first_name: Mapped[str] = mapped_column(String(50), nullable=False)
     middle_names: Mapped[str] = mapped_column(String(100), nullable=True)
     last_name: Mapped[str] = mapped_column(String(50), nullable=False)
+
+    def __repr__(self) -> str:
+        return (
+            f"{type(self).__name__}("
+            f"id={self.id!r},"
+            f"emp_no={self.emp_no!r},"
+            f"is_active={self.is_active!r},"
+            f"first_name={self.first_name!r},"
+            f"middle_names={self.middle_names!r},"
+            f"last_name={self.last_name!r}"
+            ")"
+        )
