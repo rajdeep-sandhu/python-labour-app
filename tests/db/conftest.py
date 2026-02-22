@@ -19,7 +19,9 @@ def engine(sqlite_factory: SQLiteFactory):
     # Setup: Create tables.
     Base.metadata.create_all(bind=engine)
 
-    yield
+    yield engine
 
     # Teardown: Drop tables.
     Base.metadata.drop_all(bind=engine)
+
+
