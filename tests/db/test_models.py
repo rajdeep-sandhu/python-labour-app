@@ -29,3 +29,12 @@ def test_employee_requires_last_name(session) -> None:
 
     with pytest.raises(IntegrityError):
         session.commit()
+
+
+def test_emp_no_unique_constraint(session) -> None:
+    employee_1: Employee = Employee(first_name="John", last_name="Doe", emp_no=5)
+    employee_2: Employee = Employee(first_name="Ruchika", last_name="Yashpal", emp_no=5)
+    session.add_all([employee_1, employee_2])
+
+    with pytest.raises(IntegrityError):
+        session.commit()
