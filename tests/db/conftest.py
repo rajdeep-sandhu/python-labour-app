@@ -5,7 +5,6 @@ from sqlalchemy import Connection, Engine, RootTransaction, create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
 from python_labour_app.db.models import Base
-from python_labour_app.db.sqlite_factory import SQLiteFactory
 
 
 @pytest.fixture(scope="session")
