@@ -1,5 +1,6 @@
 # test_sqlite_factory.py
 from sqlalchemy.engine import Engine
+from sqlalchemy.orm import Session
 
 from python_labour_app.db.factories.sqlite_factory import SQLiteFactory
 
@@ -10,3 +11,11 @@ def test_sqlite_factory_creates_engine() -> None:
 
     assert isinstance(engine, Engine)
     assert "sqlite" in str(engine.url)
+
+
+def test_sqlite_factory_creates_session() -> None:
+    factory = SQLiteFactory(url="sqlite+pysqlite:///test.db")
+    session = factory.create_session()
+
+    assert isinstance(session, Session)
+    session.close()
