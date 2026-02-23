@@ -32,7 +32,7 @@ class Employee(Base):
             f"last_name={self.last_name!r}"
             ")"
         )
-    
+
     def __str__(self) -> str:
         return (
             f"{self.first_name} {self.last_name}"
