@@ -11,6 +11,7 @@ def test_sqlite_factory_creates_engine() -> None:
 
     assert isinstance(engine, Engine)
     assert "sqlite" in str(engine.url)
+    assert engine.url.drivername.startswith("sqlite")
 
 
 def test_sqlite_factory_creates_session() -> None:
