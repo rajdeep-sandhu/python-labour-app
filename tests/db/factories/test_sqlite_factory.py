@@ -15,8 +15,8 @@ def test_sqlite_factory_creates_engine() -> None:
 
 
 def test_sqlite_factory_creates_session() -> None:
-    factory = SQLiteFactory(url="sqlite+pysqlite:///test.db")
-    session = factory.create_session()
+    factory: SQLiteFactory = SQLiteFactory(url="sqlite+pysqlite:///test.db")
+    session: Session = factory.create_session()
 
     assert isinstance(session, Session)
     session.close()
