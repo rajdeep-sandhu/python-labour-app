@@ -28,3 +28,8 @@ class Repository[T](ABC):
     def update(self, id: int, **kwargs: object) -> None:
         """Update an item."""
         raise NotImplementedError
+
+    @abstractmethod
+    def delete(self, id: int) -> None:
+        """Delete an item."""
+        raise NotImplementedError
