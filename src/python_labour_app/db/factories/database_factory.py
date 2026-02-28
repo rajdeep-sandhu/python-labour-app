@@ -9,7 +9,7 @@ class DatabaseFactory(ABC):
 
     @abstractmethod
     def create_engine(self) -> Engine:
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def create_session(self) -> Session:
