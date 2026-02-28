@@ -9,3 +9,6 @@ from python_labour_app.db.repositories.repository import Repository
 class MockEmployeeRepository(Repository[Employee]):
     def __init__(self, employees: Optional[dict[int, Employee]] = None):
         self.employees = employees or {}
+
+    def get(self, id_: int) -> Employee:
+        return self.employees[id_]
