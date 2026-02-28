@@ -18,3 +18,8 @@ class Repository[T](ABC):
     def get_by_criteria(self, criteria: dict[str, object]) -> Generator[T, None, None]:
         """Get items by criteria."""
         raise NotImplementedError
+
+    @abstractmethod
+    def add(self, **kwargs: object) -> None:
+        """Add an item."""
+        raise NotImplementedError
