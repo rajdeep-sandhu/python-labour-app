@@ -13,4 +13,4 @@ class DatabaseFactory(ABC):
 
     @abstractmethod
     def create_session(self) -> Session:
-        pass
+        raise NotImplementedError
