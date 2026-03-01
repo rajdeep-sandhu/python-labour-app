@@ -18,3 +18,9 @@ class MockEmployeeRepository(Repository[Employee]):
 
     def add(self, employee: Employee) -> None:
         self.employees[len(self.employees)] = employee
+
+    def update(self, employee: Employee) -> None:
+        if employee.id is None:
+            raise ValueError("Cannot update an Employee without an id.")
+        
+        self.employees[employee.id] = employee
