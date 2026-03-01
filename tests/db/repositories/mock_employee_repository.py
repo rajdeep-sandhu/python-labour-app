@@ -42,3 +42,9 @@ class MockEmployeeRepository(Repository[Employee]):
             raise ValueError("Cannot delete an Employee without an id.")
 
         del self.employees[employee.id]
+
+def main():
+    raise NotImplementedError
+
+if __name__ == "__main__":
+    main()
