@@ -36,3 +36,9 @@ class MockEmployeeRepository(Repository[Employee]):
             raise ValueError("Cannot update an Employee without an id.")
 
         self.employees[employee.id] = employee
+
+    def delete(self, employee: Employee) -> None:
+        if employee.id is None:
+            raise ValueError("Cannot delete an Employee without an id.")
+
+        del self.employees[employee.id]
