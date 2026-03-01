@@ -51,8 +51,13 @@ class MockEmployeeRepository(Repository[Employee]):
 def main():
     repo = MockEmployeeRepository()
     repo.add(Employee(emp_no=1, first_name="Natalia", last_name="Chavez"))
-    print(repo.employees)
-    print(repr(repo.get(0)))
+    repo.add(Employee(emp_no=76, first_name="Ana", last_name="Dateshidze"))
+    print(repo.employees, "\n")
+
+    print(repr(repo.get(0)), "\n")
+
+    for e in repo.get_all():
+        print(repr(e))
 
 
 if __name__ == "__main__":
