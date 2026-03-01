@@ -10,6 +10,7 @@ class MockEmployeeRepository(Repository[Employee]):
     def __init__(self, employees: Optional[dict[int, Employee]] = None):
         self.employees = employees or {}
 
+
     def get(self, id_: int) -> Employee:
         return self.employees[id_]
 
@@ -43,8 +44,13 @@ class MockEmployeeRepository(Repository[Employee]):
 
         del self.employees[employee.id]
 
+
 def main():
-    raise NotImplementedError
+    repo = MockEmployeeRepository()
+    repo.add(Employee(emp_no=1, first_name="Natalia", last_name="Chavez"))
+    print(repo.employees)
+    print(repr(repo.get(0)))
+
 
 if __name__ == "__main__":
     main()
