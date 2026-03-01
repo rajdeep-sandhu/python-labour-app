@@ -33,6 +33,10 @@ class MockEmployeeRepository(Repository[Employee]):
         if employee.id is None:
             employee.id = self._next_id
             self._next_id += 1
+
+        if employee.is_active is None:
+            employee.is_active = True
+
         self.employees[len(self.employees)] = employee
 
     def update(self, employee: Employee) -> None:
@@ -56,8 +60,8 @@ def main():
 
     print(repr(repo.get(0)), "\n")
 
-    for e in repo.get_all():
-        print(repr(e))
+    for employee in repo.get_all():
+        print(repr(employee))
 
 
 if __name__ == "__main__":
