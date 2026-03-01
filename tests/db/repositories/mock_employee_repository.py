@@ -15,3 +15,6 @@ class MockEmployeeRepository(Repository[Employee]):
 
     def get_all(self) -> Generator[Employee, None, None]:
         yield from self.employees.values()
+
+    def add(self, employee: Employee) -> None:
+        self.employees[len(self.employees)] = employee
