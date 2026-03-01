@@ -30,6 +30,9 @@ class MockEmployeeRepository(Repository[Employee]):
                 yield employee
 
     def add(self, employee: Employee) -> None:
+        if employee.id is None:
+            employee.id = self._next_id
+            self._next_id += 1
         self.employees[len(self.employees)] = employee
 
     def update(self, employee: Employee) -> None:
