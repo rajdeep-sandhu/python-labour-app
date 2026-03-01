@@ -25,7 +25,7 @@ class Repository[T](ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def update(self, id: int, **kwargs: object) -> None:
+    def update(self, id: int, **kwargs: dict[str, object]) -> None:
         """Update an item."""
         raise NotImplementedError
 
