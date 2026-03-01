@@ -1,5 +1,6 @@
 # mock_employee_repository.py
 
+from curses.ascii import EM
 from typing import Generator, Optional
 
 from python_labour_app.db.models.employee import Employee
@@ -55,12 +56,38 @@ class MockEmployeeRepository(Repository[Employee]):
 
 def main():
     repo = MockEmployeeRepository()
+
+    # Add employees
     repo.add(Employee(emp_no=1, first_name="Natalia", last_name="Chavez"))
-    repo.add(Employee(emp_no=76, first_name="Ana", last_name="Dateshidze"))
+    repo.add(
+        Employee(emp_no=76, first_name="Ana", middle_names="C", last_name="Dateshidze")
+    )
+    repo.add(Employee(emp_no=77, first_name="Alejandro", last_name="Chavez"))
     print(repo.employees, "\n")
 
+    # Get employees
     print(repr(repo.get(0)), "\n")
 
+    print("get_all()")
+    for employee in repo.get_all():
+        print(repr(employee))
+
+    print("\nget_by_criteria()")
+    criteria: dict[str, object] = {"last_name": "Chavez"}
+    for employee in repo.get_by_criteria(criteria=criteria):
+        print(repr(employee))
+
+    # Update employee
+    repo.update(Employee(id=0, emp_no=1, first_name="Cristina", last_name="Chavez"))
+    print("\nupdate()")
+    print(repr(repo.get(0)))
+
+    # Delete employee
+    emp_to_delete = repo.get(0)
+    print(f"\nDelete: {repr(emp_to_delete)}")
+    repo.delete(emp_to_delete)
+
+    print("After deletion:")
     for employee in repo.get_all():
         print(repr(employee))
 
