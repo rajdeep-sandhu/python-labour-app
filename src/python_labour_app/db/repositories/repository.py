@@ -20,7 +20,7 @@ class Repository[T](ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def add(self, **kwargs: object) -> None:
+    def add(self, **kwargs: dict[str, object]) -> None:
         """Add an item."""
         raise NotImplementedError
 
