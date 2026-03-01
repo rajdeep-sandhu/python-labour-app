@@ -16,11 +16,23 @@ class MockEmployeeRepository(Repository[Employee]):
     def get_all(self) -> Generator[Employee, None, None]:
         yield from self.employees.values()
 
+    def get_by_criteria(
+        self, criteria: dict[str, object]
+    ) -> Generator[Employee, None, None]:
+        # Iterate through employees.
+        for employee in self.employees.values():
+            # Yield employee if all criteria values match.
+            if all(
+                (getattr(employee, field, None) == value)
+                for field, value in criteria.items()
+            ):
+                yield employee
+
     def add(self, employee: Employee) -> None:
         self.employees[len(self.employees)] = employee
 
     def update(self, employee: Employee) -> None:
         if employee.id is None:
             raise ValueError("Cannot update an Employee without an id.")
-        
+
         self.employees[employee.id] = employee
