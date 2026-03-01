@@ -10,6 +10,13 @@ class Employee(Base):
     emp_no may initially be NULL and cannot be changed once assigned.
     id is used as the internal immutable primary key
     Employees can only be deactivated, not deleted.
+
+    Fields:
+    id: int
+    emp_no: int
+    is_active: bool. Default is True
+    frst_name: str
+    last_name: str
     """
 
     __tablename__ = "employees"
