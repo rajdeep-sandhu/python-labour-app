@@ -12,7 +12,7 @@ class Employee(Base):
     Employees can only be deactivated, not deleted.
 
     Fields:
-    id: int
+    id: int (primary key, autoincrement)
     emp_no: int
     is_active: bool. Default is True
     frst_name: str
