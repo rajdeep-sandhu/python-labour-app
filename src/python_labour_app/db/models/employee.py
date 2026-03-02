@@ -1,5 +1,6 @@
+# employee.py
 from sqlalchemy import Boolean, Integer, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, validates
 
 from . import Base
 
@@ -27,6 +28,17 @@ class Employee(Base):
     first_name: Mapped[str] = mapped_column(String(50), nullable=False)
     middle_names: Mapped[str] = mapped_column(String(100), nullable=True)
     last_name: Mapped[str] = mapped_column(String(50), nullable=False)
+
+    @validates("emp_no")
+    def _validate_emp_no(self, key: str, value: int | None) -> int | None:
+        """
+        Enforce immutability.
+        Allow assignment if emp_no is currently None.
+        If already set and value differs, then reject.
+        """
+        if self.emp_no is not None and value != self.emp_no:
+            raise ValueError("emp_no cannot be changed once assigned.")
+        return value
 
     def __repr__(self) -> str:
         return (
