@@ -1,6 +1,4 @@
 # mock_employee_repository.py
-
-from curses.ascii import EM
 from typing import Generator, Optional
 
 from python_labour_app.db.models.employee import Employee
