@@ -7,7 +7,7 @@ from python_labour_app.db.models import Employee
 from python_labour_app.db.repositories.repository import Repository
 
 
-class EmployeeRepository:
+class EmployeeRepository(Repository):
     def __init__(self, session: Session) -> None:
         self._session = session
 
