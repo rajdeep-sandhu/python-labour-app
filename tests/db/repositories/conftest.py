@@ -28,3 +28,6 @@ def mock_session(monkeypatch) -> None:
 
         def first(self):
             return self.first_result
+
+        def all(self):
+            return self.all_result
