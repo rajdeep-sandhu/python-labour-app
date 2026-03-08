@@ -21,6 +21,9 @@ def mock_session(monkeypatch):
             self.first_result = None
             self.all_result = None
 
+        def get(self, model, id_):
+            return self.get_result
+
         def query(self, model) -> Self:
             self.query_result = model
             return self
