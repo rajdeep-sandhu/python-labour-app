@@ -5,7 +5,7 @@ from typing import Generator
 
 class Repository[T](ABC):
     @abstractmethod
-    def get(self, id: int) -> T:
+    def get(self, id: int) -> T | None:
         """Get item by id."""
         raise NotImplementedError
 
