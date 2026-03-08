@@ -21,3 +21,7 @@ def mock_session(monkeypatch) -> None:
         def query(self, model) -> Self:
             self.query_result = model
             return self
+
+        def filter(self, condition) -> Self:
+            self.filter_result = condition
+            return self
