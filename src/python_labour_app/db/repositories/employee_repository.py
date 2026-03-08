@@ -19,3 +19,7 @@ class EmployeeRepository(Repository):
     def get_all(self) -> Generator[Employee, None, None]:
         """Get all items."""
         raise NotImplementedError
+
+    def get_by_criteria(self, criteria: dict[str, object]) -> Generator[Employee, None, None]:
+        """Get items by criteria."""
+        raise NotImplementedError
