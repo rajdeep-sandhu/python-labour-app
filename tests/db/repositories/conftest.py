@@ -31,3 +31,6 @@ def mock_session(monkeypatch) -> None:
 
         def all(self):
             return self.all_result
+
+        def add(self, obj):
+            self.added.append(obj)
