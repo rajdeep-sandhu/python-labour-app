@@ -25,3 +25,6 @@ def mock_session(monkeypatch) -> None:
         def filter(self, condition) -> Self:
             self.filter_result = condition
             return self
+
+        def first(self):
+            return self.first_result
