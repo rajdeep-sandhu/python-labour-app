@@ -1,5 +1,6 @@
 # test_employee/repository.py
-# Unit tests for EmployeeRepository
+# Unit tests for EmployeeRepository using MockSession returned by mock_session()
+# employee_repo() returns EmployeeRepository with a MockSession
 
 from python_labour_app.db.models.employee import Employee
 
