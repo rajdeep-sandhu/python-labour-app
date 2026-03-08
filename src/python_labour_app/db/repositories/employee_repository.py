@@ -15,3 +15,7 @@ class EmployeeRepository(Repository):
         """Get an employee by id."""
         employee: Employee | None = self._session.get(Employee, id)
         return employee
+
+    def get_all(self) -> Generator[Employee, None, None]:
+        """Get all items."""
+        raise NotImplementedError
