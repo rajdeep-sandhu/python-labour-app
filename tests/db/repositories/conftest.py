@@ -5,7 +5,7 @@ import pytest
 
 
 @pytest.fixture
-def mock_session(monkeypatch) -> None:
+def mock_session(monkeypatch):
     """Create a mock session object."""
 
     class MockSession:
@@ -40,3 +40,5 @@ def mock_session(monkeypatch) -> None:
 
         def delete(self, obj):
             self.deleted.append(obj)
+
+    return MockSession()
