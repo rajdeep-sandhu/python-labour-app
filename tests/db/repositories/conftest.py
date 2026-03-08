@@ -34,3 +34,7 @@ def mock_session(monkeypatch) -> None:
 
         def add(self, obj):
             self.added.append(obj)
+
+        def commit(self):
+            self.committed = True
+            
