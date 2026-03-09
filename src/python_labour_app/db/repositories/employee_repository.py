@@ -23,7 +23,7 @@ class EmployeeRepository(Repository):
     def get_by_criteria(
         self, criteria: dict[str, object]
     ) -> Generator[Employee, None, None]:
-        """Get items by criteria."""
+        """Get employees by criteria."""
         raise NotImplementedError
 
     def add(self, **kwargs: dict[str, object]) -> None:
