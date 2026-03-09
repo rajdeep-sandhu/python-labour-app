@@ -12,7 +12,11 @@ class EmployeeRepository(Repository):
         self._session = session
 
     def get(self, id: int) -> Employee | None:
-        """Get an employee by id."""
+        """
+        Get an employee by id.
+        
+        Returns None if does not exist.
+        """
         employee: Employee | None = self._session.get(Employee, id)
         return employee
 
