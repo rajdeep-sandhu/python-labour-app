@@ -22,7 +22,12 @@ def mock_session(monkeypatch):
             self.all_result = None
 
         def get(self, model, id_):
-            return self.get_result
+            """
+            Return object for the specified model and id_.
+
+            Return None if id_ does not exist.
+            """
+            return self.get_results.get(model, {}).get(id_)
 
         def query(self, model) -> Self:
             self.query_result = model
