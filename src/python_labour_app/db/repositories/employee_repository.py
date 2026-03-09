@@ -17,7 +17,7 @@ class EmployeeRepository(Repository):
         return employee
 
     def get_all(self) -> Generator[Employee, None, None]:
-        """Get all items."""
+        """Get all employees."""
         raise NotImplementedError
 
     def get_by_criteria(
