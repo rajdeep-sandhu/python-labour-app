@@ -14,7 +14,7 @@ class EmployeeRepository(Repository):
     def get(self, id: int) -> Employee | None:
         """
         Get an employee by id.
-        
+
         Returns None if does not exist.
         """
         employee: Employee | None = self._session.get(Employee, id)
@@ -32,4 +32,8 @@ class EmployeeRepository(Repository):
 
     def add(self, **kwargs: dict[str, object]) -> None:
         """Add an employee."""
+        raise NotImplementedError
+
+    def update(self, id: int, **kwargs: dict[str, object]) -> None:
+        """Update an employee."""
         raise NotImplementedError
