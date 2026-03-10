@@ -1,6 +1,7 @@
 # employee_repository.py
 from typing import Generator
 
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from python_labour_app.db.models import Employee
@@ -22,7 +23,10 @@ class EmployeeRepository(Repository[Employee]):
 
     def get_all(self) -> Generator[Employee, None, None]:
         """Get all employees."""
-        raise NotImplementedError
+        query = select(Employee)
+        result = self._session.scalars(query)
+
+        yield from result
 
     def get_by_criteria(
         self, criteria: dict[str, object]
