@@ -41,3 +41,8 @@ def test_get_all_returns_all_employees(employee_repo, mock_session):
 
     assert len(result) == 3
     assert result == [emp1, emp2, emp3]
+
+def test_get_all_returns_empty_when_no_employees(employee_repo, mock_session):
+    result = list(employee_repo.get_all())
+
+    assert result == []
