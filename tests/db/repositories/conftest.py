@@ -31,10 +31,6 @@ def mock_session(monkeypatch):
             """
             return self.get_results.get(model, {}).get(id_)
 
-        def query(self, model) -> Self:
-            self.query_result = model
-            return self
-
         def filter(self, condition) -> Self:
             self.filter_result = condition
             return self
