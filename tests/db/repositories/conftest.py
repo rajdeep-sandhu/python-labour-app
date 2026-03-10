@@ -31,9 +31,6 @@ def mock_session(monkeypatch):
             """
             return self.get_results.get(model, {}).get(id_)
 
-        def all(self):
-            return self.all_result
-
         def add(self, obj):
             self.added.append(obj)
 
