@@ -31,6 +31,10 @@ def mock_session(monkeypatch):
             """Return scalars result."""
             return self.scalars_result if self.scalars_result is not None else iter([])
 
+        def execute(self, query):
+            """Return result for query execute."""
+            return self.execute_result
+
         def add(self, obj):
             self.added.append(obj)
 
