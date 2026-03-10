@@ -27,6 +27,10 @@ def mock_session(monkeypatch):
             """
             return self.get_results.get(model, {}).get(id_)
 
+        def scalars(self, query):
+            """Return scalars result."""
+            return self.scalars_result if self.scalars_result is not None else iter([])
+
         def add(self, obj):
             self.added.append(obj)
 
