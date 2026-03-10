@@ -42,7 +42,25 @@ def test_get_all_returns_all_employees(employee_repo, mock_session):
     assert len(result) == 3
     assert result == [emp1, emp2, emp3]
 
+
 def test_get_all_returns_empty_when_no_employees(employee_repo, mock_session):
     result = list(employee_repo.get_all())
 
     assert result == []
+
+
+def test_get_by_criteria_filters_employees(employee_repo, mock_session):
+    emp1: Employee = Employee(
+        id=1, emp_no=101, is_active=True, first_name="Alice", last_name="Smith"
+    )
+    emp2: Employee = Employee(
+        id=2, emp_no=102, is_active=False, first_name="Jason", last_name="Robertson"
+    )
+
+    criteria: dict = {"is_active": False}
+
+    mock_session.scalars_result = iter([emp1, emp2])
+    result = list(employee_repo.get_by_criteria())
+
+    assert len(result) == 1
+    assert result == [emp2]
