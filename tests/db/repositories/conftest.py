@@ -16,6 +16,8 @@ def mock_session(monkeypatch):
             self.committed = False
             self.deleted = []
             self.get_results = {}
+            self.scalar_result = None
+            self.execute_result = None
             self.query_result = None
             self.filter_result = None
             self.first_result = None
