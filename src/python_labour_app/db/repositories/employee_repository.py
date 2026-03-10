@@ -7,7 +7,7 @@ from python_labour_app.db.models import Employee
 from python_labour_app.db.repositories.repository import Repository
 
 
-class EmployeeRepository(Repository):
+class EmployeeRepository(Repository[Employee]):
     def __init__(self, session: Session) -> None:
         self._session = session
 
@@ -36,4 +36,8 @@ class EmployeeRepository(Repository):
 
     def update(self, id: int, **kwargs: dict[str, object]) -> None:
         """Update an employee."""
+        raise NotImplementedError
+
+    def delete(self, id: int) -> None:
+        """Delete an employee."""
         raise NotImplementedError
