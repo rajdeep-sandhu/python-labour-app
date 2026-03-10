@@ -36,7 +36,7 @@ def test_get_all_returns_all_employees(employee_repo, mock_session):
         id=3, emp_no=103, is_active=True, first_name="Nina", last_name="Rodriquez"
     )
 
-    mock_session.all_result = [emp1, emp2, emp3]
+    mock_session.scalars_result = iter([emp1, emp2, emp3])
     result = list(employee_repo.get_all())
 
     assert len(result) == 3
