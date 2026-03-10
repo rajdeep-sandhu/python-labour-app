@@ -60,7 +60,7 @@ def test_get_by_criteria_filters_employees(employee_repo, mock_session):
     criteria: dict = {"is_active": False}
 
     mock_session.scalars_result = iter([emp1, emp2])
-    result = list(employee_repo.get_by_criteria())
+    result: list[Employee] = list(employee_repo.get_by_criteria(criteria=criteria))
 
     assert len(result) == 1
     assert result == [emp2]
