@@ -1,7 +1,7 @@
 # employee_repository.py
-from typing import Generator
+from typing import Generator, Iterator
 
-from sqlalchemy import select
+from sqlalchemy import Select, select
 from sqlalchemy.orm import Session
 
 from python_labour_app.db.models import Employee
@@ -32,7 +32,15 @@ class EmployeeRepository(Repository[Employee]):
         self, criteria: dict[str, object]
     ) -> Generator[Employee, None, None]:
         """Get employees by criteria."""
-        raise NotImplementedError
+        query: Select = select(Employee)
+
+        for field, value in criteria.items():
+            if not hasattr(Employee, field):
+                raise ValueError(f"Invalid filter criteria field: {field}.")
+            query = query.where(getattr(Employee, field) == value)
+
+        result: Iterator[Employee] = self._session.scalars(query)
+        yield from result
 
     def add(self, **kwargs: dict[str, object]) -> None:
         """Add an employee."""
