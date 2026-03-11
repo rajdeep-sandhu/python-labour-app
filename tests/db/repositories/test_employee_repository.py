@@ -2,6 +2,8 @@
 # Unit tests for EmployeeRepository using MockSession returned by mock_session()
 # employee_repo() returns EmployeeRepository with a MockSession
 
+from curses.ascii import EM
+
 from python_labour_app.db.models import Employee
 from python_labour_app.db.repositories import EmployeeRepository
 
@@ -103,6 +105,7 @@ def test_get_by_criteria_multiple_criteria(sqlite_session):
     assert len(result) == 2
     assert result == [employees[0], employees[2]]
 
+
 def test_get_by_criteria_returns_empty_if_not_found(sqlite_session):
     employees: list[Employee] = [
         Employee(emp_no=10, first_name="Jorja", last_name="Smith"),
@@ -127,3 +130,14 @@ def test_get_by_criteria_returns_empty_if_not_found(sqlite_session):
     result: list[Employee] = list(repo.get_by_criteria(criteria=criteria))
 
     assert result == []
+
+
+def test_add_persists_employee(sqlite_session):
+    employee_details: dict = {"emp_no": 10, "first_name": "Jorja", "last_name": "Smith"}
+
+    repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
+    repo.add(employee_details)
+
+    result: Employee = repo.get_by_criteria(employee_details)
+
+    assert isinstance(result, Employee)
