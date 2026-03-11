@@ -30,15 +30,9 @@ def test_get_returns_none_if_id_not_exists(sqlite_session):
 
 def test_get_all_returns_all_employees(sqlite_session):
     employees: list[Employee] = [
-        Employee(
-            id=1, emp_no=101, is_active=True, first_name="Natasha", last_name="Lisova"
-        ),
-        Employee(
-            id=2, emp_no=102, is_active=True, first_name="Ramesh", last_name="Singla"
-        ),
-        Employee(
-            id=3, emp_no=103, is_active=True, first_name="Nina", last_name="Rodriquez"
-        ),
+        Employee(emp_no=101, first_name="Natasha", last_name="Lisova"),
+        Employee(emp_no=102, first_name="Ramesh", last_name="Singla"),
+        Employee(emp_no=103, first_name="Nina", last_name="Rodriquez"),
     ]
 
     # Add to database
