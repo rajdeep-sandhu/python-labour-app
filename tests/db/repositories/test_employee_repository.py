@@ -54,7 +54,7 @@ def test_get_all_returns_all_employees(employee_repo, sqlite_session):
     assert result == employees
 
 
-def test_get_all_returns_empty_when_no_employees(employee_repo, mock_session):
+def test_get_all_returns_empty_when_no_employees(employee_repo, sqlite_session):
     result = list(employee_repo.get_all())
 
     assert result == []
