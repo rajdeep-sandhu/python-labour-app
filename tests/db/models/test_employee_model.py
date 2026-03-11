@@ -40,6 +40,15 @@ def test_emp_no_unique_constraint(sqlite_session) -> None:
         sqlite_session.commit()
 
 
+def test_employee_defaults_to_active(sqlite_session) -> None:
+    employee: Employee = Employee(first_name="Amrik", last_name="Singh")
+    sqlite_session.add(employee)
+    sqlite_session.commit()
+    sqlite_session.refresh(employee)
+
+    assert employee.is_active is True
+
+
 def test_employee_can_be_deactivated(sqlite_session) -> None:
     employee: Employee = Employee(first_name="Amrik", last_name="Singh")
     sqlite_session.add(employee)
