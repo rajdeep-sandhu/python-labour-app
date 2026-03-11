@@ -29,7 +29,7 @@ def test_get_returns_none_if_id_not_exists(employee_repo, sqlite_session):
     assert result is None
 
 
-def test_get_all_returns_all_employees(employee_repo, mock_session):
+def test_get_all_returns_all_employees(employee_repo, sqlite_session):
     emp1: Employee = Employee(
         id=1, emp_no=101, is_active=True, first_name="Natasha", last_name="Yulianova"
     )
@@ -39,8 +39,11 @@ def test_get_all_returns_all_employees(employee_repo, mock_session):
     emp3: Employee = Employee(
         id=3, emp_no=103, is_active=True, first_name="Nina", last_name="Rodriquez"
     )
-
-    mock_session.scalars_result = iter([emp1, emp2, emp3])
+    sqlite_session.add(emp1)
+    sqlite_session.add(emp2)
+    sqlite_session.add(emp3)
+    sqlite_session.commit()
+    
     result = list(employee_repo.get_all())
 
     assert len(result) == 3
