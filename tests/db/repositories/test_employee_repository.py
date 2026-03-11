@@ -32,7 +32,7 @@ def test_get_returns_none_if_id_not_exists(sqlite_session):
     assert result is None
 
 
-def test_get_all_returns_all_employees(employee_repo, sqlite_session):
+def test_get_all_returns_all_employees(sqlite_session):
     employees: list[Employee] = [
         Employee(
             id=1, emp_no=101, is_active=True, first_name="Natasha", last_name="Lisova"
@@ -51,7 +51,8 @@ def test_get_all_returns_all_employees(employee_repo, sqlite_session):
 
     sqlite_session.commit()
 
-    result: list[Employee] = list(employee_repo.get_all())
+    repo = EmployeeRepository(session=sqlite_session)
+    result: list[Employee] = list(repo.get_all())
 
     assert len(result) == 3
     assert result == employees
