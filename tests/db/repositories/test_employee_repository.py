@@ -5,11 +5,13 @@
 from python_labour_app.db.models.employee import Employee
 
 
-def test_get_returns_employee_by_id(employee_repo, mock_session):
+def test_get_returns_employee_by_id(employee_repo, sqlite_session):
     employee: Employee = Employee(
         id=1, emp_no=42, is_active=True, first_name="Baba", last_name="Dook"
     )
-    mock_session.get_results[Employee] = {1: employee}
+    sqlite_session.add(employee)
+    sqlite_session.commit()
+
     result: Employee = employee_repo.get(1)
 
     assert result == employee
