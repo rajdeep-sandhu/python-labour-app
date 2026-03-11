@@ -32,11 +32,7 @@ def test_get_returns_none_if_id_not_exists(employee_repo, sqlite_session):
 def test_get_all_returns_all_employees(employee_repo, sqlite_session):
     employees: list[Employee] = [
         Employee(
-            id=1,
-            emp_no=101,
-            is_active=True,
-            first_name="Natasha",
-            last_name="Yulianova",
+            id=1, emp_no=101, is_active=True, first_name="Natasha", last_name="Lisova"
         ),
         Employee(
             id=2, emp_no=102, is_active=True, first_name="Ramesh", last_name="Singla"
