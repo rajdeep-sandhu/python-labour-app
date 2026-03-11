@@ -3,8 +3,6 @@ from typing import Self
 
 import pytest
 
-from python_labour_app.db.repositories import EmployeeRepository
-
 
 @pytest.fixture
 def mock_session(monkeypatch):
@@ -45,9 +43,3 @@ def mock_session(monkeypatch):
             self.deleted.append(obj)
 
     return MockSession()
-
-
-@pytest.fixture
-def employee_repo(sqlite_session) -> EmployeeRepository:
-    """Create an EmployeeRepository with mock session."""
-    return EmployeeRepository(session=sqlite_session)
