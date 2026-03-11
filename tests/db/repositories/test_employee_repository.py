@@ -22,7 +22,7 @@ def test_get_returns_none_if_id_not_exists(sqlite_session):
     sqlite_session.add(employee)
     sqlite_session.commit()
 
-    repo = EmployeeRepository(session=sqlite_session)
+    repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
     result: Employee | None = repo.get(2)
 
     assert result is None
