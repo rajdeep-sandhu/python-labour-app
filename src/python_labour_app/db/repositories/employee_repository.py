@@ -24,7 +24,7 @@ class EmployeeRepository(Repository[Employee]):
     def get_all(self) -> Generator[Employee, None, None]:
         """Get all employees."""
         query = select(Employee)
-        result = self._session.scalars(query)
+        result: Iterator[Employee] = self._session.scalars(query)
 
         yield from result
 
