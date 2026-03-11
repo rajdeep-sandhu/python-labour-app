@@ -56,7 +56,7 @@ def test_get_all_returns_empty_when_no_employees(sqlite_session):
 
 
 def test_get_by_criteria_filters_employees(sqlite_session):
-    employees = [
+    employees: list[Employee] = [
         Employee(emp_no=101, first_name="Alice", last_name="Smith"),
         Employee(
             emp_no=102, is_active=False, first_name="Jason", last_name="Robertson"
@@ -70,7 +70,7 @@ def test_get_by_criteria_filters_employees(sqlite_session):
 
     criteria: dict = {"is_active": False}
 
-    repo = EmployeeRepository(session=sqlite_session)
+    repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
     result: list[Employee] = list(repo.get_by_criteria(criteria=criteria))
 
     assert len(result) == 1
