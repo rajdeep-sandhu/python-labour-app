@@ -58,7 +58,9 @@ def test_get_all_returns_empty_when_no_employees(sqlite_session):
 def test_get_by_criteria_filters_employees(sqlite_session):
     employees = [
         Employee(emp_no=101, first_name="Alice", last_name="Smith"),
-        Employee(emp_no=102, is_active=False, first_name="Jason", last_name="Robertson"),
+        Employee(
+            emp_no=102, is_active=False, first_name="Jason", last_name="Robertson"
+        ),
     ]
 
     # Add to database.
@@ -73,3 +75,30 @@ def test_get_by_criteria_filters_employees(sqlite_session):
 
     assert len(result) == 1
     assert result == [employees[1]]
+
+
+def test_get_by_criteria_multiple_criteria(sqlite_session):
+    employees: list[Employee] = [
+        Employee(emp_no=10, first_name="Jorja", last_name="Smith"),
+        Employee(emp_no=11, first_name="Callum", last_name="Baker"),
+        Employee(
+            emp_no=12,
+            is_active=False,
+            first_name="Jorja",
+            middle_names="Cristina",
+            last_name="Smith",
+        ),
+    ]
+
+    # Add to database.
+    for employee in employees:
+        sqlite_session.add(employee)
+    sqlite_session.commit()
+
+    criteria: dict = {"first_name": "Jorja", "last_name": "Smith"}
+
+    repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
+    result: list[Employee] = list(repo.get_by_criteria(criteria=criteria))
+
+    assert len(result) == 2
+    assert result == [employees[0], employees[2]]
