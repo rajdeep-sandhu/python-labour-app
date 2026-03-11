@@ -48,6 +48,6 @@ def mock_session(monkeypatch):
 
 
 @pytest.fixture
-def employee_repo(mock_session) -> EmployeeRepository:
+def employee_repo(sqlite_session) -> EmployeeRepository:
     """Create an EmployeeRepository with mock session."""
-    return EmployeeRepository(session=mock_session)
+    return EmployeeRepository(session=sqlite_session)
