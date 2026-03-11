@@ -11,7 +11,7 @@ def test_get_returns_employee_by_id(sqlite_session):
     sqlite_session.add(employee)
     sqlite_session.commit()
 
-    repo = EmployeeRepository(session=sqlite_session)
+    repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
     result: Employee | None = repo.get(1)
 
     assert result == employee
