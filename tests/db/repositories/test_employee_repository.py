@@ -7,9 +7,7 @@ from python_labour_app.db.repositories import EmployeeRepository
 
 
 def test_get_returns_employee_by_id(sqlite_session):
-    employee: Employee = Employee(
-        emp_no=42, first_name="Baba", last_name="Dook"
-    )
+    employee: Employee = Employee(emp_no=42, first_name="Baba", last_name="Dook")
     sqlite_session.add(employee)
     sqlite_session.commit()
 
@@ -20,9 +18,7 @@ def test_get_returns_employee_by_id(sqlite_session):
 
 
 def test_get_returns_none_if_id_not_exists(sqlite_session):
-    employee: Employee = Employee(
-        id=1, emp_no=42, is_active=True, first_name="Baba", last_name="Dook"
-    )
+    employee: Employee = Employee(emp_no=42, first_name="Baba", last_name="Dook")
     sqlite_session.add(employee)
     sqlite_session.commit()
 
