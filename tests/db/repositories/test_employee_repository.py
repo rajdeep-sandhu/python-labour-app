@@ -102,3 +102,28 @@ def test_get_by_criteria_multiple_criteria(sqlite_session):
 
     assert len(result) == 2
     assert result == [employees[0], employees[2]]
+
+def test_get_by_criteria_returns_empty_if_not_found(sqlite_session):
+    employees: list[Employee] = [
+        Employee(emp_no=10, first_name="Jorja", last_name="Smith"),
+        Employee(emp_no=11, first_name="Callum", last_name="Baker"),
+        Employee(
+            emp_no=12,
+            is_active=False,
+            first_name="Jorja",
+            middle_names="Cristina",
+            last_name="Smith",
+        ),
+    ]
+
+    # Add to database.
+    for employee in employees:
+        sqlite_session.add(employee)
+    sqlite_session.commit()
+
+    criteria: dict = {"first_name": "Mitsuki", "is_active": True}
+
+    repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
+    result: list[Employee] = list(repo.get_by_criteria(criteria=criteria))
+
+    assert result == []
