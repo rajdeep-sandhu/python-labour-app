@@ -30,24 +30,32 @@ def test_get_returns_none_if_id_not_exists(employee_repo, sqlite_session):
 
 
 def test_get_all_returns_all_employees(employee_repo, sqlite_session):
-    emp1: Employee = Employee(
-        id=1, emp_no=101, is_active=True, first_name="Natasha", last_name="Yulianova"
-    )
-    emp2: Employee = Employee(
-        id=2, emp_no=102, is_active=True, first_name="Ramesh", last_name="Singla"
-    )
-    emp3: Employee = Employee(
-        id=3, emp_no=103, is_active=True, first_name="Nina", last_name="Rodriquez"
-    )
-    sqlite_session.add(emp1)
-    sqlite_session.add(emp2)
-    sqlite_session.add(emp3)
+    employees: list[Employee] = [
+        Employee(
+            id=1,
+            emp_no=101,
+            is_active=True,
+            first_name="Natasha",
+            last_name="Yulianova",
+        ),
+        Employee(
+            id=2, emp_no=102, is_active=True, first_name="Ramesh", last_name="Singla"
+        ),
+        Employee(
+            id=3, emp_no=103, is_active=True, first_name="Nina", last_name="Rodriquez"
+        ),
+    ]
+
+    # Add to database
+    for employee in employees:
+        sqlite_session.add(employee)
+
     sqlite_session.commit()
-    
-    result = list(employee_repo.get_all())
+
+    result: list[Employee] = list(employee_repo.get_all())
 
     assert len(result) == 3
-    assert result == [emp1, emp2, emp3]
+    assert result == employees
 
 
 def test_get_all_returns_empty_when_no_employees(employee_repo, mock_session):
