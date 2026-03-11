@@ -19,14 +19,15 @@ def test_get_returns_employee_by_id(sqlite_session):
     assert result == employee
 
 
-def test_get_returns_none_if_id_not_exists(employee_repo, sqlite_session):
+def test_get_returns_none_if_id_not_exists(sqlite_session):
     employee: Employee = Employee(
         id=1, emp_no=42, is_active=True, first_name="Baba", last_name="Dook"
     )
     sqlite_session.add(employee)
     sqlite_session.commit()
 
-    result: Employee = employee_repo.get(2)
+    repo = EmployeeRepository(session=sqlite_session)
+    result: Employee | None = repo.get(2)
 
     assert result is None
 
