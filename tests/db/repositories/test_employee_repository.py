@@ -61,21 +61,23 @@ def test_get_all_returns_empty_when_no_employees(employee_repo, sqlite_session):
 
 
 def test_get_by_criteria_filters_employees(employee_repo, sqlite_session):
-    emp1: Employee = Employee(
-        id=1, emp_no=101, is_active=True, first_name="Alice", last_name="Smith"
-    )
-    emp2: Employee = Employee(
-        id=2, emp_no=102, is_active=False, first_name="Jason", last_name="Robertson"
-    )
+    employees = [
+        Employee(
+            id=1, emp_no=101, is_active=True, first_name="Alice", last_name="Smith"
+        ),
+        Employee(
+            id=2, emp_no=102, is_active=False, first_name="Jason", last_name="Robertson"
+        ),
+    ]
 
     # Add to database.
-    sqlite_session.add(emp1)
-    sqlite_session.add(emp2)
+    for employee in employees:
+        sqlite_session.add(employee)
     sqlite_session.commit()
 
     criteria: dict = {"is_active": False}
-    
+
     result: list[Employee] = list(employee_repo.get_by_criteria(criteria=criteria))
 
     assert len(result) == 1
-    assert result == [emp2]
+    assert result == [employees[1]]
