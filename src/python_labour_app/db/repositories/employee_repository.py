@@ -5,7 +5,7 @@ from sqlalchemy import Select, select
 from sqlalchemy.orm import Session
 
 from python_labour_app.db.models import Employee
-from python_labour_app.db.repositories.repository import Repository
+from python_labour_app.db.repositories import Repository
 
 
 class EmployeeRepository(Repository[Employee]):
