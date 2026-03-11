@@ -2,17 +2,19 @@
 # Unit tests for EmployeeRepository using MockSession returned by mock_session()
 # employee_repo() returns EmployeeRepository with a MockSession
 
-from python_labour_app.db.models.employee import Employee
+from python_labour_app.db.models import Employee
+from python_labour_app.db.repositories import EmployeeRepository
 
 
-def test_get_returns_employee_by_id(employee_repo, sqlite_session):
+def test_get_returns_employee_by_id(sqlite_session):
     employee: Employee = Employee(
         id=1, emp_no=42, is_active=True, first_name="Baba", last_name="Dook"
     )
     sqlite_session.add(employee)
     sqlite_session.commit()
 
-    result: Employee = employee_repo.get(1)
+    repo = EmployeeRepository(session=sqlite_session)
+    result: Employee | None = repo.get(1)
 
     assert result == employee
 
