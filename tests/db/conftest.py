@@ -23,7 +23,7 @@ def engine() -> Generator[Engine, None, None]:
 
 
 @pytest.fixture(scope="function")
-def session(engine) -> Generator[Session, None, None]:
+def sqlite_session(engine) -> Generator[Session, None, None]:
     """Setup and yield a Session for the test session."""
 
     # Setup
