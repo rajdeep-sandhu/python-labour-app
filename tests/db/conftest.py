@@ -27,29 +27,13 @@ def sqlite_session(engine) -> Generator[Session, None, None]:
     """Setup and yield a Session for the test session."""
 
     # Setup
-    connection: Connection = engine.connect()
-    transaction: RootTransaction = connection.begin()
-    SessionLocal: sessionmaker[Session] = sessionmaker(
-        bind=connection, autoflush=False, autocommit=False
-    )
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+
+    SessionLocal: sessionmaker = sessionmaker(bind=engine)
     session: Session = SessionLocal()
-
-    # For proper test isolation, start a nested transaction (SAVEPOINT).
-    # The outer connection.begin() is never committed.
-    # Each session.commit() operates on this SAVEPOINT.
-    # On a failing commit (e.g. IntegrityError), only the SAVEPOINT is rolled back.
-    # The outer transaction is left active, ensuring the session remains usable,
-    # and teardown rollback succeeds without deassociated transaction warnings.
-    session.begin_nested()
-
-    @event.listens_for(session, "after_transaction_end")
-    def restart_savepoint(sess: Session, trans) -> None:
-        if trans.nested and not trans._parent.nested:
-            sess.begin_nested()
 
     yield session
 
     # Teardown
     session.close()
-    transaction.rollback()
-    connection.close()
