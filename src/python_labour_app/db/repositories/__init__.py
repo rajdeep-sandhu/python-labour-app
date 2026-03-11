@@ -1,5 +1,5 @@
 # db/repositories/__init__.py
-from .employee_repository import EmployeeRepository
 from .repository import Repository
+from .employee_repository import EmployeeRepository
 
 __all__ = ["Repository", "EmployeeRepository"]
