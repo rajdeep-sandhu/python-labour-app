@@ -42,10 +42,11 @@ class EmployeeRepository(Repository[Employee]):
         result: Iterator[Employee] = self._session.scalars(query)
         yield from result
 
-    def add(self, **kwargs: dict[str, object]) -> None:
+    def add(self, **kwargs: dict[str, object]) -> Employee | None:
         """Add an employee."""
         employee: Employee = Employee(**kwargs)
         self._session.add(employee)
+        return employee
 
     def update(self, id: int, **kwargs: dict[str, object]) -> None:
         """Update an employee."""
