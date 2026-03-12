@@ -44,7 +44,9 @@ class EmployeeRepository(Repository[Employee]):
 
     def add(self, **kwargs: dict[str, object]) -> None:
         """Add an employee."""
-        raise NotImplementedError
+        employee: Employee = Employee(**kwargs)
+        self._session.add(employee)
+        self._session.commit()
 
     def update(self, id: int, **kwargs: dict[str, object]) -> None:
         """Update an employee."""
