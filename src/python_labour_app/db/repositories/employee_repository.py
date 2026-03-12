@@ -46,7 +46,6 @@ class EmployeeRepository(Repository[Employee]):
         """Add an employee."""
         employee: Employee = Employee(**kwargs)
         self._session.add(employee)
-        self._session.commit()
 
     def update(self, id: int, **kwargs: dict[str, object]) -> None:
         """Update an employee."""
