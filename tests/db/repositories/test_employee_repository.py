@@ -131,7 +131,6 @@ def test_get_by_criteria_returns_empty_if_not_found(sqlite_session):
 
 def test_add_persists_employee(sqlite_session):
     employee_details: dict = {"emp_no": 10, "first_name": "Jorja", "last_name": "Smith"}
-    employee: Employee = Employee(id=1, is_active=True, **employee_details)
 
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
     repo.add(**employee_details)
