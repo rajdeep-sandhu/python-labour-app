@@ -138,6 +138,7 @@ def test_add_persists_employee(sqlite_session):
 
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
     repo.add(**employee_details)
+    sqlite_session.flush()
 
     result: list[Employee] = list(repo.get_by_criteria(employee_details))
 
