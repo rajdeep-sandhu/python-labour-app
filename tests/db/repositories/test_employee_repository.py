@@ -8,7 +8,7 @@ from python_labour_app.db.repositories import EmployeeRepository
 def test_get_returns_employee_by_id(sqlite_session):
     employee: Employee = Employee(emp_no=42, first_name="Baba", last_name="Dook")
     sqlite_session.add(employee)
-    sqlite_session.commit()
+    sqlite_session.flush()
 
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
     result: Employee | None = repo.get(1)
@@ -140,3 +140,8 @@ def test_add_persists_employee(sqlite_session):
     assert result.emp_no == employee.emp_no
     assert result.first_name == employee.first_name
     assert result.last_name == employee.last_name
+
+def test_add_multiple_employees(sqlite_session):
+    employees: list[Employee] = [
+
+    ]
