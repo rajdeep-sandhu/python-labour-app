@@ -38,7 +38,7 @@ def test_get_all_returns_all_employees(sqlite_session):
     for employee in employees:
         sqlite_session.add(employee)
 
-    sqlite_session.commit()
+    sqlite_session.flush()
 
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
     result: list[Employee] = repo.get_all()
