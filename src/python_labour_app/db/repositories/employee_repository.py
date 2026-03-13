@@ -39,11 +39,10 @@ class EmployeeRepository(Repository[Employee]):
 
         return list(result)
 
-    def add(self, **kwargs: dict[str, object]) -> Employee | None:
+    def add(self, entity: Employee) -> Employee | None:
         """Add an employee."""
-        employee: Employee = Employee(**kwargs)
-        self._session.add(employee)
-        return employee
+        self._session.add(entity)
+        return entity
 
     def update(self, id: int, **kwargs: dict[str, object]) -> None:
         """Update an employee."""
