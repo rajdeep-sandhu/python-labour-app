@@ -1,6 +1,5 @@
 # repository.py
 from abc import ABC, abstractmethod
-from typing import Generator
 
 
 class Repository[T](ABC):
