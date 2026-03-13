@@ -29,6 +29,6 @@ class Repository[T](ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def delete(self, id: int) -> None:
+    def delete(self, entity: T) -> None:
         """Delete an item."""
         raise NotImplementedError
