@@ -10,7 +10,7 @@ class Repository[T](ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def get_all(self) -> Generator[T, None, None]:
+    def get_all(self) -> list[T]:
         """Get all items."""
         raise NotImplementedError
 
