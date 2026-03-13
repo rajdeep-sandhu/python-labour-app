@@ -49,7 +49,7 @@ def test_get_all_returns_all_employees(sqlite_session):
 
 def test_get_all_returns_empty_when_no_employees(sqlite_session):
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
-    result = list(repo.get_all())
+    result = repo.get_all()
 
     assert result == []
 
