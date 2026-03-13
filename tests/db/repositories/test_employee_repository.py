@@ -70,7 +70,7 @@ def test_get_by_criteria_filters_employees(sqlite_session):
     criteria: dict = {"is_active": False}
 
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
-    result: list[Employee] = list(repo.get_by_criteria(criteria=criteria))
+    result: list[Employee] = repo.get_by_criteria(criteria=criteria)
 
     assert len(result) == 1
     assert result == [employees[1]]
@@ -130,7 +130,11 @@ def test_get_by_criteria_returns_empty_if_not_found(sqlite_session):
 
 
 def test_add_persists_employee(sqlite_session):
-    employee_details: dict = {"emp_no": 10, "first_name": "Jorja", "last_name": "Andrews"}
+    employee_details: dict = {
+        "emp_no": 10,
+        "first_name": "Jorja",
+        "last_name": "Andrews",
+    }
 
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
     result: Employee | None = repo.add(**employee_details)
