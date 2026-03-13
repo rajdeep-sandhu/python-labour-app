@@ -1,6 +1,4 @@
 # employee_repository.py
-from typing import Iterator
-
 from sqlalchemy import ScalarResult, Select, select
 from sqlalchemy.orm import Session
 
