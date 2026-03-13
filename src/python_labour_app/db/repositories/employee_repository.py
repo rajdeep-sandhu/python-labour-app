@@ -1,7 +1,7 @@
 # employee_repository.py
-from typing import Generator, Iterator
+from typing import Iterator
 
-from sqlalchemy import Select, select
+from sqlalchemy import ScalarResult, Select, select
 from sqlalchemy.orm import Session
 
 from python_labour_app.db.models import Employee
@@ -24,13 +24,11 @@ class EmployeeRepository(Repository[Employee]):
     def get_all(self) -> list[Employee]:
         """Get all employees."""
         query = select(Employee)
-        result: Iterator[Employee] = self._session.scalars(query)
+        result: ScalarResult[Employee] = self._session.scalars(query)
 
         return list(result)
 
-    def get_by_criteria(
-        self, criteria: dict[str, object]
-    ) -> list[Employee]:
+    def get_by_criteria(self, criteria: dict[str, object]) -> list[Employee]:
         """Get employees by criteria."""
         query: Select = select(Employee)
 
@@ -40,7 +38,7 @@ class EmployeeRepository(Repository[Employee]):
             query = query.where(getattr(Employee, field) == value)
 
         result: Iterator[Employee] = self._session.scalars(query)
-        
+
         return list(result)
 
     def add(self, **kwargs: dict[str, object]) -> Employee | None:
