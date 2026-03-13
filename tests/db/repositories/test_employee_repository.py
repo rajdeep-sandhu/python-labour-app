@@ -41,7 +41,7 @@ def test_get_all_returns_all_employees(sqlite_session):
     sqlite_session.commit()
 
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
-    result: list[Employee] = list(repo.get_all())
+    result: list[Employee] = repo.get_all()
 
     assert len(result) == 3
     assert result == employees
