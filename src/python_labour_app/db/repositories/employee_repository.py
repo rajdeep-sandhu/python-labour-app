@@ -37,7 +37,7 @@ class EmployeeRepository(Repository[Employee]):
                 raise ValueError(f"Invalid filter criteria field: {field}.")
             query = query.where(getattr(Employee, field) == value)
 
-        result: Iterator[Employee] = self._session.scalars(query)
+        result: ScalarResult[Employee] = self._session.scalars(query)
 
         return list(result)
 
