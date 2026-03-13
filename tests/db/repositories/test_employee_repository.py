@@ -97,7 +97,7 @@ def test_get_by_criteria_multiple_criteria(sqlite_session):
     criteria: dict = {"first_name": "Jorja", "last_name": "Andrews"}
 
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
-    result: list[Employee] = list(repo.get_by_criteria(criteria=criteria))
+    result: list[Employee] = repo.get_by_criteria(criteria=criteria)
 
     assert len(result) == 2
     assert result == [employees[0], employees[2]]
