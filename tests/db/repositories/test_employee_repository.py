@@ -65,7 +65,7 @@ def test_get_by_criteria_filters_employees(sqlite_session):
     # Add to database.
     for employee in employees:
         sqlite_session.add(employee)
-    sqlite_session.commit()
+    sqlite_session.flush()
 
     criteria: dict = {"is_active": False}
 
