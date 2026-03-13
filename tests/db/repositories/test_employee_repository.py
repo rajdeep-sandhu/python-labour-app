@@ -130,17 +130,13 @@ def test_get_by_criteria_returns_empty_if_not_found(sqlite_session):
 
 
 def test_add_persists_employee(sqlite_session):
-    employee_details: dict = {
-        "emp_no": 10,
-        "first_name": "Jorja",
-        "last_name": "Andrews",
-    }
+    employee: Employee = Employee(emp_no=10, first_name="Jorja", last_name="Andrews")
 
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
-    result: Employee | None = repo.add(**employee_details)
+    result: Employee | None = repo.add(employee)
     sqlite_session.flush()
 
     assert isinstance(result, Employee)
-    assert result.emp_no == employee_details["emp_no"]
-    assert result.first_name == employee_details["first_name"]
-    assert result.last_name == employee_details["last_name"]
+    assert result.emp_no == employee.emp_no
+    assert result.first_name == employee.first_name
+    assert result.last_name == employee.last_name
