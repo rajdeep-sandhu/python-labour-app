@@ -30,7 +30,7 @@ class EmployeeRepository(Repository[Employee]):
 
     def get_by_criteria(
         self, criteria: dict[str, object]
-    ) -> Generator[Employee, None, None]:
+    ) -> list[Employee]:
         """Get employees by criteria."""
         query: Select = select(Employee)
 
@@ -40,7 +40,8 @@ class EmployeeRepository(Repository[Employee]):
             query = query.where(getattr(Employee, field) == value)
 
         result: Iterator[Employee] = self._session.scalars(query)
-        yield from result
+        
+        return list(result)
 
     def add(self, **kwargs: dict[str, object]) -> Employee | None:
         """Add an employee."""
