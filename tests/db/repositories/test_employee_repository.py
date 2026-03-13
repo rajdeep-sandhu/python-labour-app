@@ -124,7 +124,7 @@ def test_get_by_criteria_returns_empty_if_not_found(sqlite_session):
     criteria: dict = {"first_name": "Mitsuki", "is_active": True}
 
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
-    result: list[Employee] = list(repo.get_by_criteria(criteria=criteria))
+    result: list[Employee] = repo.get_by_criteria(criteria=criteria)
 
     assert result == []
 
