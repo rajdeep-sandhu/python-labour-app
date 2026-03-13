@@ -78,14 +78,14 @@ def test_get_by_criteria_filters_employees(sqlite_session):
 
 def test_get_by_criteria_multiple_criteria(sqlite_session):
     employees: list[Employee] = [
-        Employee(emp_no=10, first_name="Jorja", last_name="Smith"),
+        Employee(emp_no=10, first_name="Jorja", last_name="Andrews"),
         Employee(emp_no=11, first_name="Callum", last_name="Baker"),
         Employee(
             emp_no=12,
             is_active=False,
             first_name="Jorja",
             middle_names="Cristina",
-            last_name="Smith",
+            last_name="Andrews",
         ),
     ]
 
@@ -94,7 +94,7 @@ def test_get_by_criteria_multiple_criteria(sqlite_session):
         sqlite_session.add(employee)
     sqlite_session.commit()
 
-    criteria: dict = {"first_name": "Jorja", "last_name": "Smith"}
+    criteria: dict = {"first_name": "Jorja", "last_name": "Andrews"}
 
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
     result: list[Employee] = list(repo.get_by_criteria(criteria=criteria))
@@ -105,7 +105,7 @@ def test_get_by_criteria_multiple_criteria(sqlite_session):
 
 def test_get_by_criteria_returns_empty_if_not_found(sqlite_session):
     employees: list[Employee] = [
-        Employee(emp_no=10, first_name="Jorja", last_name="Smith"),
+        Employee(emp_no=10, first_name="Jorja", last_name="Andrews"),
         Employee(emp_no=11, first_name="Callum", last_name="Baker"),
         Employee(
             emp_no=12,
@@ -130,7 +130,7 @@ def test_get_by_criteria_returns_empty_if_not_found(sqlite_session):
 
 
 def test_add_persists_employee(sqlite_session):
-    employee_details: dict = {"emp_no": 10, "first_name": "Jorja", "last_name": "Smith"}
+    employee_details: dict = {"emp_no": 10, "first_name": "Jorja", "last_name": "Andrews"}
 
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
     result: Employee | None = repo.add(**employee_details)
