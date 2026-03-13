@@ -92,7 +92,7 @@ def test_get_by_criteria_multiple_criteria(sqlite_session):
     # Add to database.
     for employee in employees:
         sqlite_session.add(employee)
-    sqlite_session.commit()
+    sqlite_session.flush()
 
     criteria: dict = {"first_name": "Jorja", "last_name": "Andrews"}
 
