@@ -21,12 +21,12 @@ class EmployeeRepository(Repository[Employee]):
         employee: Employee | None = self._session.get(Employee, id)
         return employee
 
-    def get_all(self) -> Generator[Employee, None, None]:
+    def get_all(self) -> list[Employee]:
         """Get all employees."""
         query = select(Employee)
         result: Iterator[Employee] = self._session.scalars(query)
 
-        yield from result
+        return list(result)
 
     def get_by_criteria(
         self, criteria: dict[str, object]
