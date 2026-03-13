@@ -48,6 +48,6 @@ class EmployeeRepository(Repository[Employee]):
         """Update an employee."""
         raise NotImplementedError
 
-    def delete(self, id: int) -> None:
+    def delete(self, entity: Employee) -> None:
         """Delete an employee."""
         raise NotImplementedError
