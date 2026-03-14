@@ -19,7 +19,7 @@ class Repository[T](ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def add(self, entity: T) -> T | None:
+    def add(self, entity: T) -> T:
         """Add an item."""
         raise NotImplementedError
 
