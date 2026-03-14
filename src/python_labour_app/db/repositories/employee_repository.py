@@ -46,6 +46,9 @@ class EmployeeRepository(Repository[Employee]):
 
     def update(self, entity: Employee) -> Employee | None:
         """Update an employee."""
+        if entity.id is None:
+            raise ValueError("Employee id cannot be None.")
+        
         result: Employee = self._session.merge(entity)
         return result
 
