@@ -53,6 +53,9 @@ class EmployeeRepository(Repository[Employee]):
         if entity.id is None:
             raise ValueError("Employee id cannot be None.")
 
+        if self._session.get(Employee, entity.id) is None:
+            return None
+
         return entity
 
     def delete(self, entity: Employee) -> None:
