@@ -119,7 +119,7 @@ def test_get_by_criteria_returns_empty_if_not_found(sqlite_session):
     # Add to database.
     for employee in employees:
         sqlite_session.add(employee)
-    sqlite_session.commit()
+    sqlite_session.flush()
 
     criteria: dict = {"first_name": "Mitsuki", "is_active": True}
 
