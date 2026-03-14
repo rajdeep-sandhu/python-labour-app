@@ -44,7 +44,7 @@ class EmployeeRepository(Repository[Employee]):
         self._session.add(entity)
         return entity
 
-    def update(self, entity: Employee) -> None:
+    def update(self, entity: Employee) -> Employee | None:
         """Update an employee."""
         raise NotImplementedError
 
