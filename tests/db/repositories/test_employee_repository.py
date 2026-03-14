@@ -141,6 +141,7 @@ def test_add_persists_employee(sqlite_session):
     assert result.first_name == employee.first_name
     assert result.last_name == employee.last_name
 
+
 def test_add_multiple_employees(sqlite_session):
     employees: list[Employee] = [
         Employee(emp_no=101, first_name="Natasha", last_name="Lisova"),
@@ -150,14 +151,11 @@ def test_add_multiple_employees(sqlite_session):
 
     # Add to database.
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
-    results: list[Employee] = []
-
-    for employee in employees:
-        result: Employee = repo.add(employee)
-        results.append(result)
+    results: list[Employee] = [repo.add(employee) for employee in employees]
     sqlite_session.flush()
 
     assert results == employees
+
 
 def test_update_employee(sqlite_session):
     employee: Employee = Employee(emp_no=101, first_name="Natasha", last_name="Lisova")
@@ -171,6 +169,7 @@ def test_update_employee(sqlite_session):
     result: Employee | None = repo.update(employee)
 
     assert result == employee
+
 
 def test_delete_employee(sqlite_session):
     employee: Employee = Employee(emp_no=101, first_name="Natasha", last_name="Lisova")
