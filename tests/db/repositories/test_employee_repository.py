@@ -171,3 +171,17 @@ def test_update_employee(sqlite_session):
     result: Employee | None = repo.update(employee)
 
     assert result == employee
+
+def test_delete_employee(sqlite_session):
+    employee: Employee = Employee(emp_no=101, first_name="Natasha", last_name="Lisova")
+    sqlite_session.add(employee)
+    sqlite_session.flush()
+
+    # Delete from database
+    repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
+    repo.delete(employee)
+    sqlite_session.flush()
+
+    result: Employee | None = sqlite_session.get(Employee, employee.id)
+
+    assert result is None
