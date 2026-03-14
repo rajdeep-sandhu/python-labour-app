@@ -158,3 +158,16 @@ def test_add_multiple_employees(sqlite_session):
     sqlite_session.flush()
 
     assert results == employees
+
+def test_update_employee(sqlite_session):
+    employee: Employee = Employee(emp_no=101, first_name="Natasha", last_name="Lisova")
+    sqlite_session.add(employee)
+    sqlite_session.flush()
+
+    employee.first_name = "Hristina"
+
+    # Update database
+    repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
+    result: Employee | None = repo.update(employee)
+
+    assert result == employee
