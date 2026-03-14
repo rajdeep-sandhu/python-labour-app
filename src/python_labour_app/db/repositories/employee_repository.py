@@ -51,4 +51,4 @@ class EmployeeRepository(Repository[Employee]):
 
     def delete(self, entity: Employee) -> None:
         """Delete an employee."""
-        raise NotImplementedError
+        self._session.delete(entity)
