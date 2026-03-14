@@ -1,6 +1,8 @@
 # test_employee/repository.py
 # Unit tests for EmployeeRepository using MockSession returned by mock_session()
 # employee_repo() returns EmployeeRepository with a MockSession
+import pytest
+
 from python_labour_app.db.models import Employee
 from python_labour_app.db.repositories import EmployeeRepository
 
@@ -169,6 +171,21 @@ def test_update_employee(sqlite_session):
     result: Employee | None = repo.update(employee)
 
     assert result == employee
+
+def test_update_raises_when_id_is_none(sqlite_session):
+    employee: Employee = Employee(emp_no=101, first_name="Natasha", last_name="Lisova")
+    sqlite_session.add(employee)
+    sqlite_session.flush()
+
+    emp_updated: Employee = Employee(
+        emp_no=101, first_name="Hristina", last_name="Lisova"
+    )
+
+    # Update database
+    repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
+
+    with pytest.raises(ValueError):
+        repo.update(emp_updated)
 
 
 def test_delete_employee(sqlite_session):
