@@ -25,7 +25,11 @@ class Repository[T](ABC):
 
     @abstractmethod
     def update(self, entity: T) -> T | None:
-        """Update an item."""
+        """
+        Update an item.
+        This method is essentially a NOP.
+        The actual update occurs in the identity map and is persisted via a flush.
+        """
         raise NotImplementedError
 
     @abstractmethod
