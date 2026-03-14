@@ -46,7 +46,8 @@ class EmployeeRepository(Repository[Employee]):
 
     def update(self, entity: Employee) -> Employee | None:
         """Update an employee."""
-        raise NotImplementedError
+        result: Employee = self._session.merge(entity)
+        return result
 
     def delete(self, entity: Employee) -> None:
         """Delete an employee."""
