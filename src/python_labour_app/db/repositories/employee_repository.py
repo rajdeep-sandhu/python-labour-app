@@ -52,7 +52,7 @@ class EmployeeRepository(Repository[Employee]):
         """
         if entity.id is None:
             raise ValueError("Employee id cannot be None.")
-        
+
         return entity
 
     def delete(self, entity: Employee) -> None:
