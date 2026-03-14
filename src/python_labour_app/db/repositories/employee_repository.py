@@ -49,6 +49,8 @@ class EmployeeRepository(Repository[Employee]):
         Update an employee.
         This method is essentially a NOP.
         The actual update occurs in the identity map and is persisted via a flush.
+
+        Returns entity, or None if entity does not exist in the session.
         """
         if entity.id is None:
             raise ValueError("Employee id cannot be None.")
