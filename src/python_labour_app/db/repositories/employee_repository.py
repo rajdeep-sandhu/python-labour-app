@@ -45,12 +45,15 @@ class EmployeeRepository(Repository[Employee]):
         return entity
 
     def update(self, entity: Employee) -> Employee | None:
-        """Update an employee."""
+        """
+        Update an employee.
+        This method is essentially a NOP.
+        The actual update occurs in the identity map and is persisted via a flush.
+        """
         if entity.id is None:
             raise ValueError("Employee id cannot be None.")
         
-        result: Employee = self._session.merge(entity)
-        return result
+        return entity
 
     def delete(self, entity: Employee) -> None:
         """Delete an employee."""
