@@ -153,7 +153,7 @@ def test_add_multiple_employees(sqlite_session):
     results: list[Employee] = []
 
     for employee in employees:
-        result: Employee | None = repo.add(employee)
+        result: Employee = repo.add(employee)
         results.append(result)
     sqlite_session.flush()
 
