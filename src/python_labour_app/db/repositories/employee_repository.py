@@ -39,7 +39,7 @@ class EmployeeRepository(Repository[Employee]):
 
         return list(result)
 
-    def add(self, entity: Employee) -> Employee | None:
+    def add(self, entity: Employee) -> Employee:
         """Add an employee."""
         self._session.add(entity)
         return entity
