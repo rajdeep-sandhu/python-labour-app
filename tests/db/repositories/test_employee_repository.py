@@ -172,6 +172,7 @@ def test_update_employee(sqlite_session):
 
     assert result == employee
 
+
 def test_update_raises_when_id_is_none(sqlite_session):
     employee: Employee = Employee(emp_no=101, first_name="Natasha", last_name="Lisova")
     sqlite_session.add(employee)
