@@ -201,21 +201,6 @@ def test_update_returns_none_if_employee_not_exist(sqlite_session):
     assert result is None
 
 
-def test_delete_employee(sqlite_session):
-    employee: Employee = Employee(emp_no=101, first_name="Natasha", last_name="Lisova")
-    sqlite_session.add(employee)
-    sqlite_session.flush()
-
-    # Delete from database
-    repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
-    repo.delete(employee)
-    sqlite_session.flush()
-
-    result: Employee | None = sqlite_session.get(Employee, employee.id)
-
-    assert result is None
-
-
 def test_delete_not_allowed(sqlite_session):
     """.delete() should not allow delete and raise a NotImplimentedError."""
     employee: Employee = Employee(emp_no=101, first_name="Natasha", last_name="Lisova")
