@@ -61,5 +61,8 @@ class EmployeeRepository(Repository[Employee]):
         return entity
 
     def delete(self, entity: Employee) -> None:
-        """Delete an employee."""
-        self._session.delete(entity)
+        """
+        The method is kept in line with the Repository abstract method.
+        It is not implemented in keeping with domain rules to deactivate, not delete.
+        """
+        raise NotImplementedError("Employees can only be deactivated,not deleted.")
