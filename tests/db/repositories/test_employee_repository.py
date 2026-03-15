@@ -190,14 +190,15 @@ def test_update_raises_when_id_is_none(sqlite_session):
 
 
 def test_update_returns_none_if_employee_not_exist(sqlite_session):
-    employee: Employee = Employee(id=1, emp_no=101, first_name="Natasha", last_name="Lisova")
+    employee: Employee = Employee(
+        id=1, emp_no=101, first_name="Natasha", last_name="Lisova"
+    )
 
     # Update database
     repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
-    result: Employee | None= repo.update(employee)
+    result: Employee | None = repo.update(employee)
 
     assert result is None
-    
 
 
 def test_delete_employee(sqlite_session):
@@ -213,3 +214,15 @@ def test_delete_employee(sqlite_session):
     result: Employee | None = sqlite_session.get(Employee, employee.id)
 
     assert result is None
+
+
+def test_delete_not_allowed(sqlite_session):
+    """.delete() should not allow delete and raise a NotImplimentedError."""
+    employee: Employee = Employee(emp_no=101, first_name="Natasha", last_name="Lisova")
+    sqlite_session.add(employee)
+    sqlite_session.flush()
+
+    repo: EmployeeRepository = EmployeeRepository(session=sqlite_session)
+
+    with pytest.raises(NotImplementedError):
+        repo.delete(employee)
